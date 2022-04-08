@@ -1,0 +1,28 @@
+﻿@model (double bal, string num)
+@{
+    ViewData["Title"] = "Operations";
+}
+
+<div class="text-center">
+
+    <h2 class="pt-4 pb-2">Карта: @Model.num</h2>
+    <h1 class="display-4 pt-2 pb-2">Баланс: @Model.bal</h1>
+    <h3 id="clock" class="p-2"></h3>
+    <div class="btn-group-vertical">
+        <a asp-controller="Home" asp-action="Index" class="p-4 m-1 btn-primary" style="width:300px">
+            <h3>Выход</h3>
+        </a>
+        <a asp-controller="Operation" asp-action="Index" class="p-4 m-1 btn-primary" style="width:300px">
+            <h3>Назад</h3>
+        </a>
+    </div>
+</div>
+
+@section scripts {
+<script>
+        
+        $(document).ready(() => {
+            $('#clock').text(new Date().toLocaleDateString())
+        })
+</script>
+}

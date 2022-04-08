@@ -1,0 +1,77 @@
+﻿@model TestCache.ViewModels.PinVM
+@{
+    ViewData["Title"] = "Pin";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4 m-2">Карта: @Model.Number</h1>
+    <h3 class="m-2">Осталось попыток: @Model.Counter</h3>
+    <form class="mt-4 mb-3 navbar-form form-inline row" asp-action="Pin" asp-controller="Home" method="post" role="search">
+        <div class="col-3"></div>
+        <!-- <div class="input-group input-group-lg col-6 center"> -->
+        <input id="pin" type="password" class="form-control-lg rounded col-6" name="Pin" placeholder="####" readonly />
+        <!-- </div> -->
+        <input id="smt" type="submit" class="d-none" />
+    </form>
+    <div class="row">
+        <div class="col-3 mr-3"></div>
+        <div class="row col-6 center">
+            <button class="btn-dark col-4 p-4 btns">1</button>
+            <button class="btn-dark col-4 p-4 btns">2</button>
+            <button class="btn-dark col-4 p-4 btns">3</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 mr-3"></div>
+        <div class="row col-6">
+            <button class="btn-dark col-4 p-5 btns">4</button>
+            <button class="btn-dark col-4 p-5 btns">5</button>
+            <button class="btn-dark col-4 p-5 btns">6</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 mr-3"></div>
+        <div class="row col-6">
+            <button class="btn-dark col-4 p-5 btns">7</button>
+            <button class="btn-dark col-4 p-5 btns">8</button>
+            <button class="btn-dark col-4 p-5 btns">9</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 mr-3"></div>
+        <div class="row col-6">
+            <button class="btn-danger col-4 p-5 btns">Очистить</button>
+            <button class="btn-dark col-4 p-5 btns">0</button>
+            <button class="btn-success col-4 p-5 btns">OK</button>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        let showstr = ""
+        let pinvalue = ""
+
+        $(document).ready(() => {
+
+            $('.btns').click((e) => {
+                const val = e.currentTarget.innerText
+                if (val != "OK" && val != "Очистить") {
+                    //console.log(val)
+                    if ($('#pin').val().length < 4) {
+                        pinvalue += val
+                        $('#pin').val(pinvalue)
+                    }
+                } else if (val == "Очистить") {
+                    $('#pin').val("")
+                    pinvalue = ""
+                } else {
+                    if ($('#pin').val().length == 4) {
+                        $('#smt').click()
+                    }
+                }
+            })
+        })
+    </script>
+}

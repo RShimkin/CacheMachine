@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Take";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4 m-2 pb-1">Карта: @ViewBag.number</h1>
+    <form class="mt-1 mb-2 navbar-form form-inline" asp-action="Take" asp-controller="Operation" method="post">
+        <div class="col-3"></div>
+        <div class="input-group input-group-lg col-6 center">
+            <input id="sum" type="number" class="form-control rounded pr-2" name="Sumstr" placeholder="Сумма" readonly />
+        </div>
+        <input id="smt" type="submit" class="d-none" />
+        <!-- <input class="d-none" name="CardNumber" value="@ViewBag.number" /> -->
+    </form>
+
+    <div class="row">
+        <div class="col-3 mr-3"></div>
+        <div class="row col-6 center">
+            <button class="btn-dark col-4 p-5 btns">1</button>
+            <button class="btn-dark col-4 p-5 btns">2</button>
+            <button class="btn-dark col-4 p-5 btns">3</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 mr-3"></div>
+        <div class="row col-6">
+            <button class="btn-dark col-4 p-5 btns">4</button>
+            <button class="btn-dark col-4 p-5 btns">5</button>
+            <button class="btn-dark col-4 p-5 btns">6</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 mr-3"></div>
+        <div class="row col-6">
+            <button class="btn-dark col-4 p-5 btns">7</button>
+            <button class="btn-dark col-4 p-5 btns">8</button>
+            <button class="btn-dark col-4 p-5 btns">9</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 mr-3"></div>
+        <div class="row col-6">
+            <button class="btn-danger col-4 p-5 btns">Очистить</button>
+            <button class="btn-dark col-4 p-5 btns">0</button>
+            <button class="btn-success col-4 p-5 btns">OK</button>
+        </div>
+    </div>
+    <a asp-controller="Operation" asp-action="Index">Назад</a>
+</div>
+
+@section scripts {
+    <script>
+        let pinvalue = ""
+
+        $(document).ready(() => {
+
+            $('.btns').click((e) => {
+                const val = e.currentTarget.innerText
+                if (val != "OK" && val != "Очистить") {
+                    //console.log(val)
+                    if ($('#sum').val().length < 4) {
+                        pinvalue += val
+                        $('#sum').val(pinvalue)
+                    }
+                } else if (val == "Очистить") {
+                    $('#sum').val("")
+                    pinvalue = ""
+                } else {
+                    $('#smt').click()
+                }
+            })
+        })
+    </script>
+}

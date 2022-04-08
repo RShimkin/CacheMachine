@@ -1,0 +1,29 @@
+﻿@model (double sum, double res, string num, string dt)
+@{
+    ViewData["Title"] = "Operations";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4 pt-2 pb-2">@Model.num</h1>
+    <h2 class="display-4 pt-2 pb-2">@Model.sum</h2>
+    <h2 class="display-4 pt-2 pb-2">@Model.res</h2>
+    <h2 class="display-4 pt-2 pb-2">@Model.dt</h2>
+    <div class="btn-group-vertical">
+        <a asp-controller="Home" asp-action="Index"  class="p-4 m-1 btn-primary" style="width:300px">
+            <h3>Выход</h3>
+        </a>
+        <a asp-controller="Operation" asp-action="Operations" class="p-4 m-1 btn-primary" style="width:300px">
+            <h3>Назад</h3>
+        </a>
+    </div>
+</div>
+
+@section scripts {
+<script>
+        
+        $(document).ready(() => {
+            $('#clock').text(new Date().toLocaleDateString())
+        })
+</script>
+}

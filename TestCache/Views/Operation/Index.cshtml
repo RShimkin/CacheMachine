@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Operations";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4 pt-4 pb-2">карта: @ViewBag.number</h1>
+    <h3 id="clock" class="p-2"></h3>
+    <div class="btn-group-vertical p-2">
+        <a asp-controller="Operation" asp-action="Balance" class="p-4 m-1 btn-primary" style="width:300px">
+            <h3>Баланс</h3>
+        </a>
+        <a asp-controller="Operation" asp-action="Take" class="p-4 m-1 btn-primary" style="width:300px">
+            <h3>Снять сумму</h3>
+        </a>
+        <a asp-controller="Home" asp-action="Index" class="p-4 m-1 btn-primary" style="width:300px">
+            <h3>Выход</h3>
+        </a>
+    </div>
+</div>
+
+@section scripts {
+<script>
+        
+        $(document).ready(() => {
+            $('#clock').text(new Date().toLocaleString())
+            setInterval(() => {
+                let time = new Date().toLocaleString()
+                console.log(time)
+                $('#clock').text(time)
+            }, 1000)
+        })
+</script>
+}

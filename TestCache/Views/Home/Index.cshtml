@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4 m-2 ">Введите номер карты!</h1>
+    <form class="m-4 navbar-form form-inline row" asp-action="Index" asp-controller="Home" method="post" role="search">
+        <div class="col-3"></div>
+        <input id="num" type="search" class="form-control-lg rounded col-6" placeholder="####-####-####-####" readonly />
+        <input id="number" class="d-none" name="Number"/>
+        <input id="smt" type="submit" class="d-none" />
+    </form>
+    <div class="row">
+        <div class="col-3 mr-3"></div>
+        <div class="row col-6 center">
+            <button class="btn-dark col-4 p-4 btns">1</button>
+            <button class="btn-dark col-4 p-4 btns">2</button>
+            <button class="btn-dark col-4 p-4 btns">3</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 mr-3"></div>
+        <div class="row col-6">
+            <button class="btn-dark col-4 p-5 btns">4</button>
+            <button class="btn-dark col-4 p-5 btns">5</button>
+            <button class="btn-dark col-4 p-5 btns">6</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 mr-3"></div>
+        <div class="row col-6">
+            <button class="btn-dark col-4 p-5 btns">7</button>
+            <button class="btn-dark col-4 p-5 btns">8</button>
+            <button class="btn-dark col-4 p-5 btns">9</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 mr-3"></div>
+        <div class="row col-6">
+            <button class="btn-danger col-4 p-5 btns">Очистить</button>
+            <button class="btn-dark col-4 p-5 btns">0</button>
+            <button class="btn-success col-4 p-5 btns">OK</button>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        let pointer = 1
+
+        $(document).ready(() => {
+            //document.querySelector('#num').readOnly = true;
+
+            $('.btns').click((e) => {
+                const val = e.currentTarget.innerText
+                if (val != "OK" && val != "Очистить") {
+                    console.log(val)
+                    let num = $('#num').val()
+                    if (pointer < 20) {
+                        if (pointer % 5 == 0) {
+                            num += "-"
+                            pointer++
+                        }
+                        num += val
+                        $('#num').val(num)
+                        pointer++
+                    }
+                } else if (val == "Очистить") {
+                    $('#num').val("")
+                    pointer = 1
+                } else {
+                    const elem = document.querySelector("#num")
+                    let str = elem.value.replaceAll("-", "")
+                    if (str.length == 16) {
+                        $('#number').val(str)
+                        //console.log(document.querySelector("#num").value)
+                        $('#smt').click()
+                    }
+                }
+            })
+        })
+    </script>
+}

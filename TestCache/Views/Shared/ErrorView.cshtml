@@ -1,0 +1,11 @@
+﻿@model TestCache.ViewModels.ErrorVM
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="text-center">
+
+    <h1>@Model.Message</h1>
+    <a asp-controller="@Model.BackController" asp-action="@Model.BackAction">Назад</a>
+
+</div>
